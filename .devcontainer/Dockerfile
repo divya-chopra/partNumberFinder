@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/python:3.10
 
-# Install system dependencies
+# Install system dependencies including Java
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
     git \
@@ -10,10 +10,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     python3-pip \
     python3-dev \
     build-essential \
+    openjdk-11-jdk \
+    autoconf \
+    libtool \
+    pkg-config \
     libssl-dev \
     libffi-dev \
-    x11-common \
-    xvfb \
     libsdl2-dev \
     libsdl2-image-dev \
     libsdl2-mixer-dev \
@@ -24,6 +26,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     libavcodec-dev \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Set JAVA_HOME environment variable
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Install Android SDK
 ENV ANDROID_HOME=/opt/android-sdk
@@ -47,3 +53,7 @@ RUN pip3 install --upgrade pip buildozer Cython==0.29.33 kivy[base] pandas openp
 RUN mkdir -p /workspace/.buildozer \
     && chown -R vscode:vscode /workspace/.buildozer \
     && chown -R vscode:vscode ${ANDROID_HOME}
+
+# Verify Java installation
+RUN java -version
+
