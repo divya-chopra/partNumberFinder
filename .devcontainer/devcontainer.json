@@ -1,0 +1,22 @@
+{
+    "name": "Kivy Android Development",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "11",
+            "installMaven": "false",
+            "installGradle": "true"
+        }
+    }
+}

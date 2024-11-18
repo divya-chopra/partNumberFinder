@@ -1,0 +1,5 @@
+# requirements.txt
+kivy==2.2.1
+pandas==2.1.0
+openpyxl==3.1.2
+xlrd==2.0.1
